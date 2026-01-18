@@ -1,0 +1,53 @@
+==========================================
+EXPLICATION DU PROJET – API GROUPES/MEMBRES
+==========================================
+
+OBJECTIF :
+API RESTful en Node.js + Express + MySQL (via WAMP), respectant la POO et l’architecture MVC.
+
+RÔLE DE CHAQUE FICHIER :
+
+- /src/app.js
+  → Point d’entrée. Configure Express, Morgan (logs), routes.
+  → Démarre le serveur sur le port défini dans .env.
+
+- /src/db/database.js
+  → Gère la connexion à MySQL via WAMP.
+  → Utilise un pool de connexions pour performance.
+
+- /src/models/*.js
+  → Classes orientées objet (Groupe, Membre, Activite, Participation).
+  → Contiennent la logique de persistance (requêtes SQL).
+  → Respectent l’encapsulation : attributs privés, méthodes publiques.
+
+- /src/controllers/*.js
+  → Logique métier : validation, appel aux modèles, gestion des erreurs.
+  → Ne contiennent pas de SQL ni de req/res directement liés à la BDD.
+
+- /src/routes/*.js
+  → Définissent les endpoints HTTP (GET, POST, etc.).
+  → Relient les URLs aux fonctions du contrôleur.
+
+- .env
+  → Variables de configuration : connexion MySQL (WAMP), port.
+  → Ne jamais partager ce fichier.
+
+- init.sql
+  → Script SQL pour créer la base de données et les tables.
+  → À exécuter une fois dans phpMyAdmin (WAMP).
+
+STACK TECHNIQUE :
+- Backend : Node.js + Express
+- Base de données : MySQL (fournie par WAMP)
+- Logging : Morgan (affiche les requêtes dans la console)
+- Architecture : MVC stricte
+- POO : chaque entité = classe avec méthodes statiques
+
+COMMENT UTILISER AVEC WAMP :
+1. Lancer WAMP (icône verte)
+2. Ouvrir http://localhost/phpmyadmin
+3. Créer la base "groupe_membres" ou exécuter init.sql
+4. Lancer l’API avec "npm run dev"
+5. Tester avec Postman ou curl
+
+les données restent dans MySQL après redémarrage.

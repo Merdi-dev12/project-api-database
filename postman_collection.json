@@ -1,0 +1,79 @@
+{
+	"info": {
+		"name": "Groupe Membres API",
+		"_postman_id": "12345678-1234-1234-1234-123456789abc",
+		"description": "Test de l'API RESTful avec WAMP/MySQL"
+	},
+	"item": [
+		{
+			"name": "Groupes",
+			"item": [
+				{
+					"name": "Lister tous les groupes",
+					"request": {
+						"method": "GET",
+						"url": "http://localhost:3000/api/groupes"
+					}
+				},
+				{
+					"name": "Créer un groupe",
+					"request": {
+						"method": "POST",
+						"url": "http://localhost:3000/api/groupes",
+						"header": [{ "key": "Content-Type", "value": "application/json" }],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nom\": \"Équipe Alpha\",\n  \"description\": \"Projet algo\"\n}"
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Membres",
+			"item": [
+				{
+					"name": "Ajouter un membre",
+					"request": {
+						"method": "POST",
+						"url": "http://localhost:3000/api/membres",
+						"header": [{ "key": "Content-Type", "value": "application/json" }],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nom\": \"Merdi\",\n  \"email\": \"merdi@example.com\",\n  \"groupe_id\": 1,\n  \"role\": \"Responsable\"\n}"
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Activités",
+			"item": [
+				{
+					"name": "Créer une activité",
+					"request": {
+						"method": "POST",
+						"url": "http://localhost:3000/api/activites",
+						"header": [{ "key": "Content-Type", "value": "application/json" }],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"titre\": \"Réunion\",\n  \"date_activite\": \"2026-01-20T10:00:00\",\n  \"groupe_id\": 1\n}"
+						}
+					}
+				},
+				{
+					"name": "Inscrire un membre",
+					"request": {
+						"method": "POST",
+						"url": "http://localhost:3000/api/activites/participations",
+						"header": [{ "key": "Content-Type", "value": "application/json" }],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"membre_id\": 1,\n  \"activite_id\": 1\n}"
+						}
+					}
+				}
+			]
+		}
+	]
+}
