@@ -10,19 +10,19 @@ class Membre {
   }
 
   static async getAll() {
-    const [rows] = await db.execute(`
-      SELECT m.*, g.nom AS groupe_nom
-      FROM membres m
-      LEFT JOIN groupes g ON m.groupe_id = g.id
-    `);
+    const [rows] = await db.execute('SELECT * FROM membres');
     return rows.map(r => new Membre(r.id, r.nom, r.email, r.groupe_id, r.role));
   }
 
+  static async getById(id) {
+    const [rows] = await db.execute('SELECT * FROM membres WHERE id = ?', [id]);
+    if (rows.length === 0) return null;
+    const r = rows[0];
+    return new Membre(r.id, r.nom, r.email, r.groupe_id, r.role);
+  }
+
   static async getByGroupe(groupeId) {
-    const [rows] = await db.execute(
-      'SELECT * FROM membres WHERE groupe_id = ?',
-      [groupeId]
-    );
+    const [rows] = await db.execute('SELECT * FROM membres WHERE groupe_id = ?', [groupeId]);
     return rows.map(r => new Membre(r.id, r.nom, r.email, r.groupe_id, r.role));
   }
 
@@ -40,22 +40,12 @@ class Membre {
       'UPDATE membres SET nom = ?, email = ?, groupe_id = ?, role = ? WHERE id = ?',
       [nom, email, groupe_id, role, id]
     );
-    const [rows] = await db.execute('SELECT * FROM membres WHERE id = ?', [id]);
-    if (rows.length === 0) return null;
-    const r = rows[0];
-    return new Membre(r.id, r.nom, r.email, r.groupe_id, r.role);
+    return this.getById(id);
   }
 
   static async delete(id) {
     const [result] = await db.execute('DELETE FROM membres WHERE id = ?', [id]);
     return result.affectedRows > 0;
-  }
-
-  static async getById(id) {
-  const [rows] = await db.execute('SELECT * FROM membres WHERE id = ?', [id]);
-  if (rows.length === 0) return null;
-  const r = rows[0];
-  return new Membre(r.id, r.nom, r.email, r.groupe_id, r.role);
   }
 }
 

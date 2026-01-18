@@ -1,9 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const { getAllGroupes, getGroupeWithDetails } = require('../controllers/groupeController');
+const {
+  getAllGroupes,
+  getGroupeWithDetails,
+  createGroupe,
+  updateGroupe,
+  deleteGroupe
+} = require('../controllers/groupeController');
 
 router.get('/', getAllGroupes);
 router.get('/:id', getGroupeWithDetails);
-// POST, PUT, DELETE...
+router.post('/', createGroupe);
+router.put('/:id', updateGroupe);
+router.delete('/:id', deleteGroupe);
 
 module.exports = router;

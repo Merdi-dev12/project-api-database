@@ -11,6 +11,6 @@ const pool = mysql.createPool({
   queueLimit: 0
 });
 
-console.log('Connecté à MySQL (WAMP)');
+console.log('Connecté à MySQL (XAMPP)');
 
 module.exports = pool;

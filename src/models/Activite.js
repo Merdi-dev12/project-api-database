@@ -1,4 +1,3 @@
-// src/models/Activite.js
 const db = require('../db/database');
 
 class Activite {
@@ -15,10 +14,7 @@ class Activite {
   }
 
   static async getByGroupe(groupeId) {
-    const [rows] = await db.execute(
-      'SELECT * FROM activites WHERE groupe_id = ?',
-      [groupeId]
-    );
+    const [rows] = await db.execute('SELECT * FROM activites WHERE groupe_id = ?', [groupeId]);
     return rows.map(r => new Activite(r.id, r.titre, r.date_activite, r.groupe_id));
   }
 

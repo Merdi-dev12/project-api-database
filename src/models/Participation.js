@@ -24,9 +24,9 @@ class Participation {
     return rows.map(r => new Participation(r.id, r.membre_id, r.activite_id, r.present));
   }
 
-  static async markPresent(participationId) {
-    await db.execute('UPDATE participations SET present = TRUE WHERE id = ?', [participationId]);
-    const [rows] = await db.execute('SELECT * FROM participations WHERE id = ?', [participationId]);
+  static async markPresent(id) {
+    await db.execute('UPDATE participations SET present = TRUE WHERE id = ?', [id]);
+    const [rows] = await db.execute('SELECT * FROM participations WHERE id = ?', [id]);
     if (rows.length === 0) return null;
     const r = rows[0];
     return new Participation(r.id, r.membre_id, r.activite_id, r.present);
